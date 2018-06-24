@@ -69,6 +69,7 @@ if __name__ == '__main__':
         axbyc = add_gate_1.forward(axby, c)
         return sig_gate.forward(axbyc)
     s = forward_prop()
+    print('initial result', s.value)
 
     s.grad = 1
     sig_gate.backward()
@@ -77,3 +78,11 @@ if __name__ == '__main__':
     mul_gate_1.backward()
     mul_gate_0.backward()
     print(a.grad, b.grad, c.grad, x.grad, y.grad)
+
+    step_size = 0.01
+    a.value += step_size * a.grad
+    b.value += step_size * b.grad
+    c.value += step_size * c.grad
+    x.value += step_size * x.grad
+    y.value += step_size * y.grad
+    print('updated value', forward_prop().value)
