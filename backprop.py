@@ -37,7 +37,7 @@ class AddGate:
 
 class SigmoidGate:
     def sig(self, x):
-        return 1 / 1 + math.exp(-x)
+        return 1 / (1 + math.exp(-x))
 
     def forward(self, u0):
         self.u0 = u0
