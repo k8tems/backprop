@@ -60,14 +60,17 @@ if __name__ == '__main__':
     mul_gate_1 = MultiplyGate()
     add_gate_0 = AddGate()
     add_gate_1 = AddGate()
+    sig_gate = SigmoidGate()
 
     ax = mul_gate_0.forward(a, x)
     by = mul_gate_1.forward(b, y)
 
     axby = add_gate_0.forward(ax, by)
     axbyc = add_gate_1.forward(axby, c)
+    s = sig_gate.forward(axbyc)
 
-    axbyc.grad = 1
+    s.grad = 1
+    sig_gate.backward()
     add_gate_1.backward()
     add_gate_0.backward()
     mul_gate_1.backward()
