@@ -1,4 +1,5 @@
 # Increase the output of a single neuron
+# Taken from http://karpathy.github.io/neuralnets/ and refactored a bit
 import math
 
 
