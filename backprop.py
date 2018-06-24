@@ -78,19 +78,22 @@ if __name__ == '__main__':
     s = forward_prop()
     print('initial result', s.value)
 
-    s.grad = 1
-    sig_gate.backward()
-    add_gate_1.backward()
-    add_gate_0.backward()
-    mul_gate_1.backward()
-    mul_gate_0.backward()
-    print(a.grad, b.grad, c.grad, x.grad, y.grad)
+    def backward_prop():
+        s.grad = 1
+        sig_gate.backward()
+        add_gate_1.backward()
+        add_gate_0.backward()
+        mul_gate_1.backward()
+        mul_gate_0.backward()
+        print(a.grad, b.grad, c.grad, x.grad, y.grad)
 
-    step_size = 0.01
-    a.value += step_size * a.grad
-    b.value += step_size * b.grad
-    c.value += step_size * c.grad
-    x.value += step_size * x.grad
-    y.value += step_size * y.grad
+        step_size = 0.01
+        a.value += step_size * a.grad
+        b.value += step_size * b.grad
+        c.value += step_size * c.grad
+        x.value += step_size * x.grad
+        y.value += step_size * y.grad
+    backward_prop()
+
     # should be higher than initial value
     print('updated value', forward_prop().value)
