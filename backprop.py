@@ -18,3 +18,10 @@ class multiplyGate:
     def backward(self):
       self.u0.grad += self.u1.value * self.utop.grad
       self.u1.grad += self.u0.value * self.utop.grad
+
+
+if __name__ == '__main__':
+    x = Unit(1.0, 0.0)
+    y = Unit(2.0, 0.0)
+    gate = multiplyGate()
+    gate.forward(x, y)
