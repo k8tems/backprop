@@ -24,4 +24,8 @@ if __name__ == '__main__':
     x = Unit(1.0, 0.0)
     y = Unit(2.0, 0.0)
     gate = multiplyGate()
-    print(gate.forward(x, y).value)
+    xy = gate.forward(x, y)
+
+    xy.grad = 1
+    gate.backward()
+    print(x.grad, y.grad)
