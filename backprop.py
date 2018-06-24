@@ -1,7 +1,7 @@
+# Increase the output of a single neuron
 import math
 
 
-# every Unit corresponds to a wire in the diagrams
 class Unit:
     def __init__(self, value, grad):
         # value computed in the forward pass
@@ -12,7 +12,6 @@ class Unit:
 
 class MultiplyGate:
     def forward(self, in0, in1):
-        # store pointer to input Units in0 and in1 and output unit out
         self.in0 = in0
         self.in1 = in1
         self.out = Unit(in0.value * in1.value, 0.0)
@@ -90,4 +89,5 @@ if __name__ == '__main__':
     c.value += step_size * c.grad
     x.value += step_size * x.grad
     y.value += step_size * y.grad
+    # should be higher than initial value
     print('updated value', forward_prop().value)
