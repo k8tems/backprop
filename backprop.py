@@ -12,7 +12,7 @@ class Unit:
 
 class MultiplyGate:
     def forward(self, in0, in1):
-        # store pointer to input Units in0 and in1 and output unit utop
+        # store pointer to input Units in0 and in1 and output unit out
         self.in0 = in0
         self.in1 = in1
         self.out = Unit(in0.value * in1.value, 0.0)
