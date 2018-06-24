@@ -19,6 +19,8 @@ class MultiplyGate:
         return self.out
 
     def backward(self):
+        # ∂/∂in0[in0*in1]*out.grad=in1*out.grad
+        # ∂/∂in1[in0*in1]*out.grad=in0*out.grad
         self.in0.grad += self.in1.value * self.out.grad
         self.in1.grad += self.in0.value * self.out.grad
 
