@@ -62,12 +62,13 @@ if __name__ == '__main__':
     add_gate_1 = AddGate()
     sig_gate = SigmoidGate()
 
-    ax = mul_gate_0.forward(a, x)
-    by = mul_gate_1.forward(b, y)
-
-    axby = add_gate_0.forward(ax, by)
-    axbyc = add_gate_1.forward(axby, c)
-    s = sig_gate.forward(axbyc)
+    def forward_prop():
+        ax = mul_gate_0.forward(a, x)
+        by = mul_gate_1.forward(b, y)
+        axby = add_gate_0.forward(ax, by)
+        axbyc = add_gate_1.forward(axby, c)
+        return sig_gate.forward(axbyc)
+    s = forward_prop()
 
     s.grad = 1
     sig_gate.backward()
