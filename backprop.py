@@ -13,28 +13,28 @@ class Unit:
 class MultiplyGate:
     def forward(self, u0, u1):
         # store pointer to input Units u0 and u1 and output unit utop
-        self.u0 = u0
-        self.u1 = u1
-        self.utop = Unit(u0.value * u1.value, 0.0)
-        return self.utop
+        self.in0 = u0
+        self.in1 = u1
+        self.out = Unit(u0.value * u1.value, 0.0)
+        return self.out
 
     def backward(self):
-        self.u0.grad += self.u1.value * self.utop.grad
-        self.u1.grad += self.u0.value * self.utop.grad
+        self.in0.grad += self.in1.value * self.out.grad
+        self.in1.grad += self.in0.value * self.out.grad
 
 
 class AddGate:
     def forward(self, u0, u1):
-        self.u0 = u0
-        self.u1 = u1
-        self.utop = Unit(u0.value + u1.value, 0.0)
-        return self.utop
+        self.in0 = u0
+        self.in1 = u1
+        self.out = Unit(self.in0.value + self.in1.value, 0.0)
+        return self.out
 
     def backward(self):
         # ∂/∂u0[u0+u1]*out.grad=1*out.grad
         # ∂/∂u1[u0+u1]*out.grad=1*out.grad
-        self.u0.grad += 1 * self.utop.grad
-        self.u1.grad += 1 * self.utop.grad
+        self.in0.grad += 1 * self.out.grad
+        self.in1.grad += 1 * self.out.grad
 
 
 class SigmoidGate:
@@ -42,14 +42,14 @@ class SigmoidGate:
         return 1 / (1 + math.exp(-x))
 
     def forward(self, u0):
-        self.u0 = u0
-        self.utop = Unit(self.sig(self.u0.value), 0.0)
-        return self.utop
+        self.in0 = u0
+        self.out = Unit(self.sig(self.in0.value), 0.0)
+        return self.out
 
     def backward(self):
-        s = self.sig(self.u0.value)
+        s = self.sig(self.in0.value)
         # ∂σ/∂x*d/dx[x]=σ(1-σ)*1
-        self.u0.grad += (s * (1 - s)) * self.utop.grad
+        self.in0.grad += (s * (1 - s)) * self.out.grad
 
 
 if __name__ == '__main__':
