@@ -7,7 +7,7 @@ class Unit:
         self.grad = grad
 
 
-class multiplyGate:
+class MultiplyGate:
     def forward(self, u0, u1):
         # store pointer to input Units u0 and u1 and output unit utop
         self.u0 = u0
@@ -35,7 +35,7 @@ class AddGate:
 if __name__ == '__main__':
     x = Unit(1.0, 0.0)
     y = Unit(2.0, 0.0)
-    gate = multiplyGate()
+    gate = MultiplyGate()
     xy = gate.forward(x, y)
 
     xy.grad = 1
