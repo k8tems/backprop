@@ -20,6 +20,18 @@ class multiplyGate:
         self.u1.grad += self.u0.value * self.utop.grad
 
 
+class AddGate:
+    def forward(self, u0, u1):
+        self.u0 = u0
+        self.u1 = u1
+        self.utop = Unit(u0.value + u1.value, 0.0)
+        return self.utop
+
+    def backward(self):
+        self.u0.grad += 1 * self.utop.grad
+        self.u1.grad += 1 * self.utop.grad
+
+
 if __name__ == '__main__':
     x = Unit(1.0, 0.0)
     y = Unit(2.0, 0.0)
