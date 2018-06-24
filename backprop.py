@@ -31,6 +31,8 @@ class AddGate:
         return self.utop
 
     def backward(self):
+        # ∂/∂u0[u0+u1]*out.grad=1*out.grad
+        # ∂/∂u1[u0+u1]*out.grad=1*out.grad
         self.u0.grad += 1 * self.utop.grad
         self.u1.grad += 1 * self.utop.grad
 
