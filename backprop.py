@@ -1,3 +1,6 @@
+import math
+
+
 # every Unit corresponds to a wire in the diagrams
 class Unit:
     def __init__(self, value, grad):
@@ -30,6 +33,20 @@ class AddGate:
     def backward(self):
         self.u0.grad += 1 * self.utop.grad
         self.u1.grad += 1 * self.utop.grad
+
+
+class SigmoidGate:
+    def sig(self, x):
+        return 1 / 1 + math.exp(-x)
+
+    def forward(self, u0):
+        self.u0 = u0
+        self.utop = Unit(self.sig(self.u0.value), 0.0)
+        return self.utop
+
+    def backward(self):
+        s = self.sig(self.u0.value)
+        self.u0.grad += (s * (1 - s)) * self.utop.grad
 
 
 if __name__ == '__main__':
