@@ -11,11 +11,11 @@ class Unit:
 
 
 class MultiplyGate:
-    def forward(self, u0, u1):
-        # store pointer to input Units u0 and u1 and output unit utop
-        self.in0 = u0
-        self.in1 = u1
-        self.out = Unit(u0.value * u1.value, 0.0)
+    def forward(self, in0, in1):
+        # store pointer to input Units in0 and in1 and output unit utop
+        self.in0 = in0
+        self.in1 = in1
+        self.out = Unit(in0.value * in1.value, 0.0)
         return self.out
 
     def backward(self):
@@ -24,15 +24,15 @@ class MultiplyGate:
 
 
 class AddGate:
-    def forward(self, u0, u1):
-        self.in0 = u0
-        self.in1 = u1
+    def forward(self, in0, in1):
+        self.in0 = in0
+        self.in1 = in1
         self.out = Unit(self.in0.value + self.in1.value, 0.0)
         return self.out
 
     def backward(self):
-        # ∂/∂u0[u0+u1]*out.grad=1*out.grad
-        # ∂/∂u1[u0+u1]*out.grad=1*out.grad
+        # ∂/∂in0[in0+in1]*out.grad=1*out.grad
+        # ∂/∂in1[in0+in1]*out.grad=1*out.grad
         self.in0.grad += 1 * self.out.grad
         self.in1.grad += 1 * self.out.grad
 
@@ -41,8 +41,8 @@ class SigmoidGate:
     def sig(self, x):
         return 1 / (1 + math.exp(-x))
 
-    def forward(self, u0):
-        self.in0 = u0
+    def forward(self, in0):
+        self.in0 = in0
         self.out = Unit(self.sig(self.in0.value), 0.0)
         return self.out
 
