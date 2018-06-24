@@ -46,6 +46,7 @@ class SigmoidGate:
 
     def backward(self):
         s = self.sig(self.u0.value)
+        # ∂σ/∂x*d/dx[x]=σ(1-σ)*1
         self.u0.grad += (s * (1 - s)) * self.utop.grad
 
 
