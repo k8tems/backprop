@@ -33,11 +33,26 @@ class AddGate:
 
 
 if __name__ == '__main__':
-    x = Unit(1.0, 0.0)
-    y = Unit(2.0, 0.0)
-    gate = MultiplyGate()
-    xy = gate.forward(x, y)
+    a = Unit(1.0, 0.0)
+    b = Unit(2.0, 0.0)
+    c = Unit(-3.0, 0.0)
+    x = Unit(-1.0, 0.0)
+    y = Unit(3.0, 0.0)
 
-    xy.grad = 1
-    gate.backward()
-    print(x.grad, y.grad)
+    mul_gate_0 = MultiplyGate()
+    mul_gate_1 = MultiplyGate()
+    add_gate_0 = AddGate()
+    add_gate_1 = AddGate()
+
+    ax = mul_gate_0.forward(a, x)
+    by = mul_gate_1.forward(b, y)
+
+    axby = add_gate_0.forward(ax, by)
+    axbyc = add_gate_1.forward(axby, c)
+
+    axbyc.grad = 1
+    add_gate_1.backward()
+    add_gate_0.backward()
+    mul_gate_1.backward()
+    mul_gate_0.backward()
+    print(a.grad, b.grad, c.grad, x.grad, y.grad)
