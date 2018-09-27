@@ -36,8 +36,8 @@ class AddGate:
         return self.out
 
     def backward(self):
-        # ∂/∂in0[in0+in1]*out.grad=1*out.grad
-        # ∂/∂in1[in0+in1]*out.grad=1*out.grad
+        # ∂/∂in0[in0+in1]=1
+        # ∂/∂in1[in0+in1]=1
         self.in0.grad += 1 * self.out.grad
         self.in1.grad += 1 * self.out.grad
 
@@ -57,7 +57,6 @@ class SigmoidGate:
         return self.sig(x) * (1 - self.sig(x))
 
     def backward(self):
-        # `in0.grad` is `out.grad` in `AddGate
         self.in0.grad += self.gradient(self.in0.value) * self.out.grad
 
 
