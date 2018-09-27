@@ -1,5 +1,10 @@
 # Compute gradient with the analytical method and
 # compare with the gradient produced via the numerical method as a sanity check
+# Highly nonlinear equations are not possible to solve with the analytical method?
+# https://www.researchgate.net/post/What_are_the_advantages_of_numerical_method_over_analyatical_method2
+# -> Let f be a highly nonlinear equation
+# -> x_1_grad = (f(x_1+h, x_2, ... x_n) + f(x_1, x_2, ... x_n)) / h
+# Why won't this work??
 import math
 
 
