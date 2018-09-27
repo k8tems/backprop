@@ -50,9 +50,6 @@ class SigmoidGate:
 
     def backward(self):
         s = self.sig(self.in0.value)
-        # This is the final gate so the gradient for the output is 1
-        # (i.e. d/dx[z]=1)
-        # ∂σ/∂z*d/dx[z]=σ(1-σ)*1
 
         # `in0.grad` is `out.grad` in `AddGate
         self.in0.grad += (s * (1 - s)) * self.out.grad
