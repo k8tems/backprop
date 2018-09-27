@@ -48,14 +48,14 @@ class SigmoidGate:
         self.out = Unit(self.sig(self.in0.value), 0.0)
         return self.out
 
-    def backward(self):
-        s = self.sig(self.in0.value)
+    def gradient(self, x):
+        # The gradient of σ is weird because the output is used in its calculation
+        return self.sig(x) * (1 - self.sig(x))
 
+    def backward(self):
         # `out.grad` is 1
         # `in0.grad` is `out.grad` in `AddGate
-
-        # Why is dσ/dx calculated with `s`(the output) and not `x`?
-        self.in0.grad += (s * (1 - s)) * self.out.grad
+        self.in0.grad += self.gradient(self.in0.value) * self.out.grad
 
 
 if __name__ == '__main__':
