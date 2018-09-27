@@ -53,7 +53,7 @@ class SigmoidGate:
 
     def gradient(self, x):
         # The gradient of σ is weird because the output is used in its calculation
-        # i.e. dσ/dx=σ(x)(1-σ(x))
+        # i.e. ∂σ/∂x=σ(x)(1-σ(x))
         return self.sig(x) * (1 - self.sig(x))
 
     def backward(self):
@@ -61,7 +61,16 @@ class SigmoidGate:
 
 
 if __name__ == '__main__':
-    """Calculate the gradient of σ(ax+by+c) and increase the result"""
+    """
+    Calculate the gradient of σ(ax+by+c) and increase the result
+    
+    ∂σ/∂a = ∂σ/∂(ax+by+c) * ∂(ax+by+c)/∂a
+    ∂(ax+by+c)/∂a = ∂(ax+by+c)/∂(ax+by) * ∂(ax+by)/∂a
+    ∂(ax+by)/∂a = ∂(ax+by)/∂(ax) * ∂(ax)/∂a 
+    
+    Notice the chain rule is being applied backwards,
+    with the gradient of the outer most function calculated first. 
+    """
     a = Unit(1.0, 0.0)
     b = Unit(2.0, 0.0)
     c = Unit(-3.0, 0.0)
