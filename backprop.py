@@ -53,6 +53,8 @@ class SigmoidGate:
         # This is the final gate so the gradient for the output is 1
         # (i.e. d/dx[x]=1)
         # ∂σ/∂x*d/dx[x]=σ(1-σ)*1
+
+        # `in0.grad` is `out.grad` in `AddGate
         self.in0.grad += (s * (1 - s)) * self.out.grad
 
 
