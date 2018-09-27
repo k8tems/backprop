@@ -1,5 +1,12 @@
-# Increase the output of a single neuron
-# Taken from http://karpathy.github.io/neuralnets/ and refactored a bit
+"""
+Increase the output of a single neuron
+Taken from http://karpathy.github.io/neuralnets/ and refactored a bit
+
+Pending questions:
+- How can this be generalized to vectors?
+Should every element in every vector be considered as a variable?
+- How is the gradient calculated for dot and matrix products?
+"""
 import math
 
 
