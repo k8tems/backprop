@@ -57,6 +57,7 @@ class SigmoidGate:
 
 
 if __name__ == '__main__':
+    """Calculate the gradient of ax+by+c and increase the result"""
     a = Unit(1.0, 0.0)
     b = Unit(2.0, 0.0)
     c = Unit(-3.0, 0.0)
