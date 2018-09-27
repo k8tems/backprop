@@ -66,7 +66,9 @@ if __name__ == '__main__':
     
     ∂σ/∂a = ∂σ/∂(ax+by+c) * ∂(ax+by+c)/∂a
     ∂(ax+by+c)/∂a = ∂(ax+by+c)/∂(ax+by) * ∂(ax+by)/∂a
-    ∂(ax+by)/∂a = ∂(ax+by)/∂(ax) * ∂(ax)/∂a 
+    ∂(ax+by)/∂a = ∂(ax+by)/∂(ax) * ∂(ax)/∂a
+    
+    a <- a + α(∂σ/∂a) 
     
     Notice the chain rule is being applied backwards with
     the gradient of the outer most function calculated first. 
