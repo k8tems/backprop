@@ -68,8 +68,8 @@ if __name__ == '__main__':
     ∂(ax+by+c)/∂a = ∂(ax+by+c)/∂(ax+by) * ∂(ax+by)/∂a
     ∂(ax+by)/∂a = ∂(ax+by)/∂(ax) * ∂(ax)/∂a 
     
-    Notice the chain rule is being applied backwards,
-    with the gradient of the outer most function calculated first. 
+    Notice the chain rule is being applied backwards with
+    the gradient of the outer most function calculated first. 
     """
     a = Unit(1.0, 0.0)
     b = Unit(2.0, 0.0)
