@@ -20,7 +20,7 @@ class MultiplyGate:
 
     def backward(self):
         # `out.grad` is the gradient of the outer function
-        # cf. Chain rule: outer gradient /wrt inner function * inner gradient
+        # cf. Chain rule: outer gradient w.r.t inner function * inner gradient
         # In this case, self.in*.grad is the inner and out.grad is the outer gradient
         # ∂/∂in0[in0*in1]=in1
         # ∂/∂in1[in0*in1]=in0
