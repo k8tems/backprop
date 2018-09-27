@@ -50,6 +50,7 @@ class SigmoidGate:
 
     def gradient(self, x):
         # The gradient of σ is weird because the output is used in its calculation
+        # i.e. dσ/dx=σ(x)(1-σ(x))
         return self.sig(x) * (1 - self.sig(x))
 
     def backward(self):
