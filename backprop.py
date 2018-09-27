@@ -51,6 +51,7 @@ class SigmoidGate:
     def backward(self):
         s = self.sig(self.in0.value)
 
+        # `out.grad` is 1
         # `in0.grad` is `out.grad` in `AddGate
         self.in0.grad += (s * (1 - s)) * self.out.grad
 
