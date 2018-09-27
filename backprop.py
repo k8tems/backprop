@@ -53,6 +53,8 @@ class SigmoidGate:
 
         # `out.grad` is 1
         # `in0.grad` is `out.grad` in `AddGate
+
+        # Why is dσ/dx calculated with `s`(the output) and not `x`?
         self.in0.grad += (s * (1 - s)) * self.out.grad
 
 
