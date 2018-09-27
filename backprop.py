@@ -19,8 +19,11 @@ class MultiplyGate:
         return self.out
 
     def backward(self):
-        # ∂/∂in0[in0*in1]*out.grad=in1*out.grad
-        # ∂/∂in1[in0*in1]*out.grad=in0*out.grad
+        # `out.grad` is the gradient of the outer function
+        # cf. Chain rule: outer gradient /wrt inner function * inner gradient
+        # In this case, self.in*.grad is the inner and out.grad is the outer gradient
+        # ∂/∂in0[in0*in1]=in1
+        # ∂/∂in1[in0*in1]=in0
         self.in0.grad += self.in1.value * self.out.grad
         self.in1.grad += self.in0.value * self.out.grad
 
@@ -54,7 +57,6 @@ class SigmoidGate:
         return self.sig(x) * (1 - self.sig(x))
 
     def backward(self):
-        # `out.grad` is 1
         # `in0.grad` is `out.grad` in `AddGate
         self.in0.grad += self.gradient(self.in0.value) * self.out.grad
 
